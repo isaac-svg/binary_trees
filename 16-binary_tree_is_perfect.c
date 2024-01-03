@@ -3,6 +3,24 @@
 /**
  * binary_tree_is_perfect - Checks if a binary tree is perfect
  * @tree: Pointer to root node
+ * Return: 0 if not perfect else 1
+ */
+
+int binary_tree_is_perfect(const binary_tree_t *tree)
+{
+	if (tree == NULL)
+		return (0);
+
+	int height = 0;
+	int nodes = 0;
+
+	return (binary_tree_is_perfect_helper(tree, &height, &nodes));
+}
+
+
+/**
+ * binary_tree_is_perfect_helper - Checks if a binary tree is perfect
+ * @tree: Pointer to root node
  * @height: height of the tree
  * @nodes: pointer to the nodes
  * Return: 0 if not perfect else 1
