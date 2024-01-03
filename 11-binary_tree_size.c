@@ -2,14 +2,17 @@
 /**
  * binary_tree_size - Computes the size
  * @tree: Pointer to head node
- * Returns: Size of the tree
+ * Return: Size of the tree
 */
 size_t binary_tree_size(const binary_tree_t *tree)
 {
-    if (tree == NULL) {
-        return (0);  
-    }
+	size_t sze = 0;
 
-  
-    return (1 + binary_tree_size(tree->left) + binary_tree_size(tree->right));
+	if (tree)
+	{
+		sze += 1;
+		sze += binary_tree_size(tree->left);
+		sze += binary_tree_size(tree->right);
+	}
+	return (sze);
 }
