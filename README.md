@@ -1,6 +1,6 @@
 # Binary trees
 
-## Tasks :page_with_curl:
+## Tasks
 
 - **0. New node**
 
