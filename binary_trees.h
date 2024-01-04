@@ -41,6 +41,14 @@ int binary_tree_is_full(const binary_tree_t *tree);
 int binary_tree_is_perfect_helper(const binary_tree_t *tree, int *height,
 		int *nodes);
 int binary_tree_is_perfect(const binary_tree_t *tree);
+int is_full(const binary_tree_t *tree);
+
+
+
+
+
+
+
 
 
 #endif /* BTREE_H */
