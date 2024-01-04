@@ -13,10 +13,10 @@
  */
 struct binary_tree_s
 {
-    int n;
-    struct binary_tree_s *parent;
-    struct binary_tree_s *left;
-    struct binary_tree_s *right;
+	int n;
+	struct binary_tree_s *parent;
+	struct binary_tree_s *left;
+	struct binary_tree_s *right;
 };
 
 typedef struct binary_tree_s binary_tree_t;
@@ -38,8 +38,8 @@ size_t binary_tree_leaves(const binary_tree_t *tree);
 size_t binary_tree_nodes(const binary_tree_t *tree);
 int binary_tree_balance(const binary_tree_t *tree);
 int binary_tree_is_full(const binary_tree_t *tree);
-int binary_tree_is_perfect_helper(const binary_tree_t *tree, int *height,
-		int *nodes);
+int binary_tree_is_perfect_helper(const binary_tree_t *tree, int *height
+		, int *nodes);
 int binary_tree_is_perfect(const binary_tree_t *tree);
 int is_full(const binary_tree_t *tree);
 
