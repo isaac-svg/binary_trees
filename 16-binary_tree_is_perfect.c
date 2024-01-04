@@ -5,49 +5,67 @@
  * @tree: Pointer to root node
  * Return: 0 if not perfect else 1
  */
-
 int binary_tree_is_perfect(const binary_tree_t *tree)
 {
 	if (tree == NULL)
 		return (0);
+	return (is_perfect_recursive(tree, depth(get_leaf(tree)), 0));
+}
 
-	int height = 0;
-	int nodes = 0;
-
-	return (binary_tree_is_perfect_helper(tree, &height, &nodes));
+/**
+ * is_perfect_recursive - Checks if a binary tree is perfect recursively.
+ * @tree: A pointer to the root node of the tree to check.
+ * @leaf_depth: The depth of one leaf
+ * @level: Level of current node
+ *
+ * Return: 1 if perfect, otherwise 0.
+ */
+int is_perfect_recursive(const binary_tree_t *tree,
+		size_t leaf_depth, size_t level)
+{
+	if (is_leaf(tree))
+		return (level == leaf_depth ? 1 : 0);
+	if (tree->left == NULL || tree->right == NULL)
+		return (0);
+	return (is_perfect_recursive(tree->left, leaf_depth, level + 1) &&
+		is_perfect_recursive(tree->right, leaf_depth, level + 1));
 }
 
 
 /**
- * binary_tree_is_perfect_helper - Checks if a binary tree is perfect
- * @tree: Pointer to root node
- * @height: height of the tree
- * @nodes: pointer to the nodes
- * Return: 0 if not perfect else 1
+ * depth - Returns the depth of a given
+ *         node in a binary tree.
+ * @tree:  Pointer to the node to measure the depth of.
+ *
+ * Return: The depth of node.
  */
-
-int binary_tree_is_perfect_helper(const binary_tree_t *tree, int *height,
-		int *nodes)
+size_t depth(const binary_tree_t *tree)
 {
-	if (tree == NULL)
-	{
-		*height = 0;
-		*nodes = 0;
-		return (1);
-	}
-	int left_height = 0, right_height = 0;
-	int left_nodes = 0, right_nodes = 0;
+	return (tree->parent != NULL ? 1 + depth(tree->parent) : 0);
+}
 
-	if (!binary_tree_is_perfect_helper(tree->left, &left_height,
-				&left_nodes) || !binary_tree_is_perfect_helper(tree->right, &right_height,
-		&right_nodes))
-		return (0);
 
-	if (left_height != right_height || left_nodes != right_nodes)
-		return (0);
+/**
+ * is_leaf - Checks if a node is a leaf
+ * @node:  Pointer to the node to check.
+ *
+ * Return: 1 If the node is a leaf otherwise 0.
+ */
+unsigned char is_leaf(const binary_tree_t *node)
+{
+	return ((node->left == NULL && node->right == NULL) ? 1 : 0);
+}
 
-	*height = 1 + left_height;
-	*nodes = 1 + left_nodes + right_nodes;
-	return (*nodes == (1 << *height) - 1);
 
+/**
+ * get_leaf - Returns a leaf of a binary tree.
+ * @tree: Pointer to the root node of the tree to find a leaf in.
+ *
+ * Return: Pointer to the first encountered leaf.
+ */
+const binary_tree_t *get_leaf(const binary_tree_t *tree)
+{
+	if (is_leaf(tree) == 1)
+		return (tree);
+	return (tree->left ? get_leaf(tree->left) : get_leaf(tree->right));
 }
